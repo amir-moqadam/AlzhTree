@@ -39,7 +39,7 @@ class DecisionTreeAnalysis:
                   max_depth=max_depth, 
                   feature_names=feature_names if feature_names else self.features, 
                   filled=True)
-        plt.title(f"Decision Tree (Max Depth: {max_depth})\nTest R-squared: {r_squared_test:.4f}, Test Error: {test_error:.4f}")
+        plt.title(f"Decision Tree for {self.target} (Max Depth: {max_depth})\nTest R-squared: {r_squared_test:.4f}, Test Error: {test_error:.4f}")
         plt.show()
 
     def print_most_important_features(self, top_x=5):
@@ -96,14 +96,14 @@ class DecisionTreeAnalysis:
         plt.figure(figsize=(14, 7))
         plt.subplot(1, 2, 1)
         plt.plot(depths, r_squared_scores, marker='o')
-        plt.title("Test R-squared vs. Max Depth")
+        plt.title(f"Test R-squared vs. Max Depth for {self.target}")
         plt.xlabel("Max Depth")
         plt.ylabel("Test R-squared")
 
         # Plot number of leaves
         plt.subplot(1, 2, 2)
         plt.plot(depths, num_leaves, marker='o', color='red')
-        plt.title("Number of Leaves vs. Max Depth")
+        plt.title(f"Number of Leaves vs. Max Depth for {self.target}")
         plt.xlabel("Max Depth")
         plt.ylabel("Number of Leaves")
 
@@ -143,7 +143,7 @@ class RandomForestAnalysis:
         # Plotting feature importances as the "tree"
         indices = np.argsort(self.feature_importances_)[::-1]
         plt.figure(figsize=figsize)
-        plt.title(f"Random Forest (Max Depth: {max_depth})\nTest R-squared: {r_squared_test:.4f}, Test Error: {test_error:.4f}")
+        plt.title(f"Random Forest for {self.target} (Max Depth: {max_depth})\nTest R-squared: {r_squared_test:.4f}, Test Error: {test_error:.4f}")
         plt.bar(range(len(self.feature_importances_)), self.feature_importances_[indices], align="center")
         plt.xticks(range(len(self.feature_importances_)), np.array(self.features)[indices], rotation=90)
         plt.xlim([-1, len(self.feature_importances_)])
@@ -200,7 +200,7 @@ class RandomForestAnalysis:
         # Plot R-squared scores
         plt.figure(figsize=(14, 7))
         plt.plot(depths, r_squared_scores, marker='o')
-        plt.title("Test R-squared vs. Max Depth")
+        plt.title(f"Test R-squared vs. Max Depth for {self.target}")
         plt.xlabel("Max Depth")
         plt.ylabel("Test R-squared")
         plt.tight_layout()
